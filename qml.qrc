@@ -4,5 +4,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>ContactItem.qml</file>
         <file>icons/person.png</file>
+        <file>ContactList.qml</file>
+        <file>MainToolBar.qml</file>
     </qresource>
 </RCC>
