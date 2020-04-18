@@ -7,9 +7,21 @@ Rectangle {
     id: me
     property alias icon: icon.source
     property alias text: label.text
+    property bool selected: false
+
+    signal leftClick()
+    signal rightClick()
 
     width: parent.width
     height: 60
+
+    color: {
+        if (selected)
+            return "#4fc1e9";
+        if (area.containsMouse)
+            return "#f1f1f1";
+        return "white"
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -27,6 +39,18 @@ Rectangle {
             id: label
             Layout.fillWidth: true
             font.bold: true
+        }
+    }
+    MouseArea {
+        id: area
+        anchors.fill: parent
+        hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: {
+            if (mouse.button === Qt.LeftButton)
+                leftClick();
+            if (mouse.button === Qt.RightButton)
+                rightClick();
         }
     }
 }

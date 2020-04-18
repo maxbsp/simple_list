@@ -22,10 +22,15 @@ Window {
     }
 
     ListView {
+        id: list
         anchors.fill: parent
         model: contactsModel
         delegate: ContactItem {
             text: name
+            selected: list.currentIndex === index
+            onLeftClick: {
+                list.currentIndex = index
+            }
         }
     }
 }
