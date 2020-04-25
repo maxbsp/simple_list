@@ -13,6 +13,7 @@ Window {
         id: contactsModel
         ListElement {
             name: "Василий"
+            line2: "Был в сети 20 минут назад"
         }
         ListElement {
             name: "Анна"
