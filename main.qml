@@ -34,9 +34,24 @@ Window {
         }
 
         ContactList {
+            id: list
             Layout.fillHeight: true
             Layout.fillWidth: true
             model: contactsModel
+            onMenu: {
+                contactListMenu.popup();
+            }
+        }
+    }
+
+    Menu {
+        id: contactListMenu
+        modal: true
+        MenuItem {
+            text: "Удалить"
+            onTriggered: {
+                contactsModel.remove(list.menuIndex);
+            }
         }
     }
 
