@@ -5,15 +5,64 @@ import QtQuick.Layouts 1.12
 
 Rectangle {
     id: me
+    state: "base"
     color: "steelblue"
     implicitHeight: 40
+    property int transitionDuration: 200
     signal newItem(string text)
 
     function add()
     {
         newItem(textField.text);
-        textField.clear();
     }
+
+    states: [
+        State {
+            name: "base"
+            PropertyChanges {
+                target: textField
+                visible: false
+                x: me.width
+                width: 0
+            }
+        },
+        State {
+            name: "creation"
+            PropertyChanges {
+                target: textField
+                visible: true
+                x: 0
+                width: parent.width
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "base"
+            to: "creation"
+            NumberAnimation {
+                properties: "x,width"
+                easing.type: Easing.InOutQuad
+                duration: transitionDuration
+            }
+        },
+        Transition {
+            from: "creation"
+            to: "base"
+            SequentialAnimation {
+                NumberAnimation {
+                    properties: "x,width"
+                    easing.type: Easing.InOutQuad
+                    duration: transitionDuration
+                }
+                NumberAnimation {
+                    properties: "visible"
+                    duration: 0
+                }
+            }
+        }
+    ]
 
     RowLayout {
         id: row
@@ -40,8 +89,16 @@ Rectangle {
         }
     }
 
-    Keys.onEnterPressed: {
-        add();
+    TextPanel {
+        id: textField
+        height: parent.height
+        onCanceled: {
+            me.state = "base";
+        }
+        onAccepted: {
+            me.add();
+            me.state = "base";
+        }
     }
 }
 
