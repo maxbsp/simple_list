@@ -1,5 +1,4 @@
 import QtQuick 2.13
-import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
@@ -100,6 +99,11 @@ Rectangle {
             me.state = "base";
         }
     }
+
+    Shortcut {
+      sequence: "Ctrl+N"
+      onActivated: me.state = "creation"
+  }
 }
 
 /*##^##
