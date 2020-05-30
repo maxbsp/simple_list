@@ -4,7 +4,7 @@ import QtQuick.Controls 2.13
 
 ListView {
     id: list
-    property int menuIndex: null
+    property int menuIndex: -1
     signal menu()
 
     clip: true
