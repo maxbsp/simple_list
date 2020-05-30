@@ -3,14 +3,11 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 
-RowLayout {
+Rectangle {
+    id: me
+    color: "steelblue"
+    implicitHeight: 40
     signal newItem(string text)
-    TextField {
-        id: textField
-        selectByMouse: true
-        Layout.fillWidth: true
-        focus: true
-    }
 
     function add()
     {
@@ -18,16 +15,29 @@ RowLayout {
         textField.clear();
     }
 
-    Button {
-        text: "Добавить"
-        highlighted: true
-        onClicked: {
-            add();
+    RowLayout {
+        id: row
+        anchors.fill: parent
+        anchors.margins: 10
+        Label {
+            id: name
+            text: "SimpleChat"
+            color: "white"
+            font.bold: true
+            font.pixelSize: 14
+            Layout.fillWidth: true
         }
-    }
 
-    Keys.onReturnPressed: {
-        add();
+        ImageButton {
+            id: addButton
+            Layout.fillHeight: true
+            Layout.preferredWidth: height
+            source: "icons/plus.png"
+            color: "white"
+            onClicked: {
+                me.state = "creation"
+            }
+        }
     }
 
     Keys.onEnterPressed: {

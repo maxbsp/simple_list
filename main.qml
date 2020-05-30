@@ -28,7 +28,6 @@ Window {
         spacing: 0
         MainToolBar {
             Layout.fillWidth: true
-            Layout.margins: 4
             onNewItem: {
                 contactsModel.append({name: text});
             }
